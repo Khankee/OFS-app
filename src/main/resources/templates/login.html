@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Registration and Login System</title>
+    <link th:href="@{/css/login.css}" rel="stylesheet" >
+    <!--<link th:href="@{https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap}" rel="stylesheet">-->
+</head>
+<body>
+<nav>
+    <div class="container-right">
+        <a th:href="@{/index}">
+                <img th:src = "@{/images/Icon.png}" alt="icon">
+        </a>
+    </div>
+</nav>
+<div class = "container-pic">
+    <img th:src = "@{/images/Logo.png}" alt="Picture">
+</div>
+
+<div class="container-header">
+    <h1>Computer Science MSc Learning Tool</h1>
+</div>
+
+<hr style="border-top: 5px solid #333;">
+
+<div class="container-create">
+    <h2>Login</h2>
+</div>
+
+<div class="container-to-register">
+    Haven't registered?<a th:href="@{/register}"> Sign up!</a>
+</div>
+
+<div class="login_form">
+    <div class="col-md-6 offset-md-3">
+        <div th:if="${param.error}">
+                <div class="alert alert-danger">Invalid Email or Password</div>
+        </div>
+        <div th:if="${param.logout}">
+                <div class="alert alert-success"> You have been logged out.</div>
+        </div>
+        <form
+                        method="post"
+                        role="form"
+                        th:action="@{/login}"
+                        class="form-horizontal"
+                >
+                    <div class="form-group mb-10">
+                        <label class="control-label"> Email</label>
+                        <input
+                                type="text"
+                                id="username"
+                                name="username"
+                                class="form-control"
+                                placeholder="Enter email address"
+                        />
+                    </div>
+
+                    <div class="form-group mb-10">
+                        <label class="control-label"> Password</label>
+                        <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                class="form-control"
+                                placeholder="Enter password"
+                        />
+                    </div>
+                    <div class="form-group mb-3">
+                        <button type="submit" class="submit-btn" >Login</button>
+                    </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>
