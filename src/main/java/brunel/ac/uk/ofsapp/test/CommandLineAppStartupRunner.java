@@ -25,7 +25,5 @@ public class CommandLineAppStartupRunner implements org.springframework.boot.Com
 
         userRepository.save(user);
     }
-
-
 }
 */
