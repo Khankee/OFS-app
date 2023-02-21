@@ -15,7 +15,7 @@ import org.hibernate.validator.constraints.Length;
 public class UserDto {
 
     private Long id;
-    @NotEmpty
+    @NotEmpty(message = "Name required")
     private String name;
     @NotEmpty(message = "Email is required")
     @Email(message = "Email should be valid")
