@@ -30,6 +30,11 @@
   <div class="row col-md-10">
     <h2>List of Registered Users</h2>
   </div>
+  <div class = "row col-md-10">
+    <h1>
+      Hello <h1 th:text = "${admin.name}"/>
+    </h1>
+  </div>
   <table class="table table-bordered table-hover">
     <thead class="table-dark">
     <tr>
@@ -41,6 +46,7 @@
     <tr th:each = "user : ${users}">
       <td th:text = "${user.name}"></td>
       <td th:text = "${user.email}"></td>
+      <td th:text = "${user.password}"></td>
     </tr>
     </tbody>
   </table>

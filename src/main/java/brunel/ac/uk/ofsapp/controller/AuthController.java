@@ -2,6 +2,7 @@ package brunel.ac.uk.ofsapp.controller;
 
 import brunel.ac.uk.ofsapp.dto.UserDto;
 import brunel.ac.uk.ofsapp.entity.User;
+import brunel.ac.uk.ofsapp.repository.UserRepository;
 import brunel.ac.uk.ofsapp.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
@@ -17,9 +18,12 @@ import java.util.List;
 public class AuthController {
 
     private final UserService userService;
+    private final UserRepository userRepository;
 
-    public AuthController(UserService userService) {
+    public AuthController(UserService userService,
+                          UserRepository userRepository) {
         this.userService = userService;
+        this.userRepository = userRepository;
     }
 
     @GetMapping("/index")
@@ -53,8 +57,14 @@ public class AuthController {
     }
 
     @GetMapping("/users")
-    public String users(Model model){
+    public String users(Model model, Model adminModel){
         List<UserDto> users = userService.findAllUsers();
+        List<User> adminList = userRepository.findAdminUsers();
+        User adminUser = null;
+        if(!adminList.isEmpty()){
+            adminUser = adminList.get(0);
+        }
+        adminModel.addAttribute("admin" , adminUser);
         model.addAttribute("users", users);
         return "users";
     }
