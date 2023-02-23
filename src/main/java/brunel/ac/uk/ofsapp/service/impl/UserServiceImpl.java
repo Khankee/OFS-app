@@ -42,6 +42,7 @@ public class UserServiceImpl implements UserService {
                 role = checkRoleExist();
             }
             user.setRoles(List.of(role));
+            //user.setEnabled(true);
             userRepository.save(user);
             return;
         }
@@ -50,6 +51,7 @@ public class UserServiceImpl implements UserService {
             role = addRoleUser();
         }
         user.setRoles(List.of(role));
+        //user.setEnabled(false);
         userRepository.save(user);
     }
 
