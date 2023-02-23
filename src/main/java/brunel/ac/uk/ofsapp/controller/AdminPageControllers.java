@@ -4,6 +4,8 @@ import brunel.ac.uk.ofsapp.dto.UserDto;
 import brunel.ac.uk.ofsapp.entity.User;
 import brunel.ac.uk.ofsapp.repository.UserRepository;
 import brunel.ac.uk.ofsapp.service.UserService;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,12 +31,10 @@ public class AdminPageControllers {
     @GetMapping("/users")
     public String users(Model model, Model adminModel){
         List<UserDto> users = userService.findAllUsers();
-        List<User> adminList = userRepository.findAdminUsers();
-        User adminUser = null;
-        if(!adminList.isEmpty()){
-            adminUser = adminList.get(0);
-        }
-        adminModel.addAttribute("admin" , adminUser);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String adminEmail = authentication.getName();
+        User admin = userRepository.findByEmail(adminEmail);
+        adminModel.addAttribute("admin" , admin);
         model.addAttribute("users", users);
         return "users";
     }
@@ -50,8 +50,9 @@ public class AdminPageControllers {
                                         @RequestParam("confirmPassword") String confirmPassword,
                                         Model model) {
 
-        List<User> adminList = userRepository.findAdminUsers();
-        User adminUser = adminList.get(0);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String adminEmail = authentication.getName();
+        User adminUser = userRepository.findByEmail(adminEmail);
 
         if (!passwordEncoder.matches(currentPassword, adminUser.getPassword())) {
             model.addAttribute("error", "The current password you entered is incorrect.");

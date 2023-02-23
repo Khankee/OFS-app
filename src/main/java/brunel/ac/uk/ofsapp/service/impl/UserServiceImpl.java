@@ -36,7 +36,10 @@ public class UserServiceImpl implements UserService {
         //encrypt the password once we integrate spring security
         //user.setPassword(userDto.getPassword());
         user.setPassword(passwordEncoder.encode(userDto.getPassword()));
-        if(user.getEmail().equals("Arukhan.kenes@gmail.com") && userDto.getPassword().equals("1234567890")){
+        if (
+                (user.getEmail().equals("Arukhan.kenes@gmail.com") && userDto.getPassword().equals("1234567890")) ||
+                (user.getEmail().equals("1940930@brunel.ac.uk") && userDto.getPassword().equals("1234567890"))
+            ) {
             Role role = roleRepository.findByName("ROLE_ADMIN");
             if(role == null) {
                 role = checkRoleExist();
@@ -62,7 +65,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<UserDto> findAllUsers() {
-        List<User> users = userRepository.findAll();
+        List<User> users = userRepository.findAllUsersWithUserRole();
         return users.stream().map(this::convertEntityToDto)
                 .collect(Collectors.toList());
     }
