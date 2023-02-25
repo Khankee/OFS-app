@@ -69,4 +69,16 @@ public class AdminPageControllers {
 
         return "redirect:/users";
     }
+
+    @GetMapping("/deleteAllUsers")
+    public String getDeleteAllUsersPage(){
+        return "deleteAllUsers";
+    }
+
+    @PostMapping("/deleteAllUsers")
+    public String deleteAllUsers() {
+        List<User> users = userRepository.findAllUsersWithUserRole();
+        userRepository.deleteAll(users);
+        return "redirect:/users";
+    }
 }
