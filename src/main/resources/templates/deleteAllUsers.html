@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="EN">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Delete All Users</title>
+</head>
+<body>
+<h1>Delete All Users</h1>
+<p>Are you sure you want to delete all users?</p>
+<form th:action="@{/deleteAllUsers}" method="post">
+  <button type="submit">Delete All Users</button>
+</form>
+</body>
+</html>
