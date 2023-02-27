@@ -37,12 +37,28 @@
     <tr>
       <th>Name</th>
       <th>Email</th>
+      <th>Creativity</th>
+      <th>Algorithmic thinking</th>
+      <th>Cooperative</th>
+      <th>Critical Thinking</th>
+      <th>Problem solving</th>
+      <th>Action</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each = "user : ${users}">
       <td th:text = "${user.name}"></td>
       <td th:text = "${user.email}"></td>
+      <td th:text = "${user.creativity}"></td>
+      <td th:text = "${user.algorithmic}"></td>
+      <td th:text = "${user.cooperative}"></td>
+      <td th:text = "${user.critical}"></td>
+      <td th:text = "${user.problemSolving}"></td>
+      <td>
+        <form th:action="@{/users/delete/{email}(email=${user.email})}" method="post">
+          <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
+      </td>
     </tr>
     </tbody>
   </table>

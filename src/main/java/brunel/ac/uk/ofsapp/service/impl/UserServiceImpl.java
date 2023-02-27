@@ -64,17 +64,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UserDto> findAllUsers() {
-        List<User> users = userRepository.findAllUsersWithUserRole();
-        return users.stream().map(this::convertEntityToDto)
-                .collect(Collectors.toList());
-    }
-
-    private UserDto convertEntityToDto(User user){
-        UserDto userDto = new UserDto();
-        userDto.setName(user.getName());
-        userDto.setEmail(user.getEmail());
-        return userDto;
+    public List<User> findAllUsers() {
+        return userRepository.findAllUsersWithUserRole();
     }
 
     private Role checkRoleExist() {

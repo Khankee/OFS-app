@@ -30,7 +30,10 @@ public class SecurityConfig {
                 .authorizeHttpRequests((authorize) ->
                         authorize.requestMatchers("/register/**").permitAll()
                                 .requestMatchers("/index").permitAll()
-                                .requestMatchers("/users", "/admin-change-password","/deleteAllUsers").hasRole("ADMIN")
+                                .requestMatchers("/users",
+                                                "/admin-change-password",
+                                                "/deleteAllUsers",
+                                                "/users/delete/{email}").hasRole("ADMIN")
                                 .requestMatchers("/profile").hasAnyRole("ADMIN", "USER")
                                 .requestMatchers("/css/**", "/js/**", "/images/**").permitAll()
                 ).formLogin(
